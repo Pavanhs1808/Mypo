@@ -40,4 +40,7 @@ task = "packager.installForAll"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+<<<<<<< HEAD
  and deploy in netlify or vercel
+=======
+>>>>>>> 18d7c019d19239cdc982b08156961005e39e4753
