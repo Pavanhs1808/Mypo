@@ -11,10 +11,6 @@ const NavLinks = [
   { href: "#about", label: "About" },
   { href: "#skills", label: "Skills" },
   { href: "#projects", label: "Projects" },
-<<<<<<< HEAD
-  { href: "#gallery", label: "Gallery" },
-=======
->>>>>>> 65ad5c5 (first commit)
   { href: "#certificates", label: "Certificates" },
   { href: "#extracurricular", label: "Activities" },
   { href: "#contact", label: "Contact" },
