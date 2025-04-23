@@ -4,10 +4,6 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
-<<<<<<< HEAD
-import Gallery from "@/components/Gallery";
-=======
->>>>>>> 65ad5c5 (first commit)
 import Certificates from "@/components/Certificates";
 import Extracurricular from "@/components/Extracurricular";
 import ContactSection from "@/components/ContactSection";
@@ -42,10 +38,6 @@ export default function Home() {
       <About />
       <Skills />
       <Projects />
-<<<<<<< HEAD
-      <Gallery />
-=======
->>>>>>> 65ad5c5 (first commit)
       <Certificates />
       <Extracurricular />
       <ContactSection />
