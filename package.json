@@ -102,5 +102,8 @@
   },
   "optionalDependencies": {
     "bufferutil": "^4.0.8"
+  },
+  "overrides": {
+  "rollup": "^3.29.4"
   }
 }
