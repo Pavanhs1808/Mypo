@@ -1,17 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import themePlugin from "@replit/vite-plugin-shadcn-theme-json";
-import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import path from "path";
 
-// Async plugin setup for cartographer (used in Replit only)
+// Async plugin setup
 export default defineConfig(async () => {
   const plugins = [
     react(),
-    runtimeErrorOverlay(),
     themePlugin(),
+    runtimeErrorOverlay(),
   ];
 
+  // Enable cartographer only on Replit in dev
   if (
     process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
@@ -21,6 +22,7 @@ export default defineConfig(async () => {
   }
 
   return {
+    root: path.resolve(__dirname, "client"), // Vite's root is /client
     plugins,
     resolve: {
       alias: {
@@ -29,16 +31,15 @@ export default defineConfig(async () => {
         "@assets": path.resolve(__dirname, "attached_assets"),
       },
     },
-    root: path.resolve(__dirname, "client"),
     build: {
-      outDir: path.resolve(__dirname, "dist/client"), // Match server/index.ts
+      outDir: path.resolve(__dirname, "dist/client"), // Output to dist/client
       emptyOutDir: true,
     },
+    // You can remove `middlewareMode` in production builds
     server: {
       fs: {
         allow: ["."],
       },
-      middlewareMode: true,
     },
   };
 });
