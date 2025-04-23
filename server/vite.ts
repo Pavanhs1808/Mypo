@@ -2,7 +2,7 @@ import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
-import { type Server } from "http";
+import { type Server, createServer } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 import { fileURLToPath } from "url";
@@ -47,7 +47,6 @@ export async function setupVite(app: Express, server: Server) {
 
   app.use(vite.middlewares);
 
-  // Only add the catch-all Vite HTML transformation in development
   if (process.env.NODE_ENV === "development") {
     app.use("*", async (req, res, next) => {
       const url = req.originalUrl;
@@ -72,7 +71,7 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(process.cwd(), "dist", "public");
+  const distPath = path.resolve(process.cwd(), "client", "dist");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -86,3 +85,20 @@ export function serveStatic(app: Express) {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
+
+// 🔥 This runs the server when this file is executed
+const app = express();
+const server = createServer(app);
+
+(async () => {
+  if (process.env.NODE_ENV === "development") {
+    await setupVite(app, server);
+  } else {
+    serveStatic(app);
+  }
+
+  const PORT = process.env.PORT || 3000;
+  server.listen(PORT, () => {
+    log(`Server is running at http://localhost:${PORT}`);
+  });
+})();
